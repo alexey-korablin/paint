@@ -1,6 +1,6 @@
 module.exports = () => {
     $.gulp.task('style', () => {
-        $.gulp.src('app/styles/**/*.less')
+        return $.gulp.src('app/styles/**/*.less')
         .pipe($.gp.sourcemaps.init())
         .pipe($.gp.less({
             'include css': true

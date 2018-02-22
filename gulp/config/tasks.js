@@ -3,5 +3,6 @@ module.exports = [
     './gulp/tasks/layout',
     './gulp/tasks/style',
     './gulp/tasks/serve',
-    './gulp/tasks/testing'
+    './gulp/tasks/testing',
+    './gulp/tasks/watch'
 ]
