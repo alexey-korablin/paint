@@ -34,7 +34,6 @@ module.exports = () => {
             message: 'Error: <%= error.message %>',
             title: 'Style'
         }))
-        .pipe($.gp.csso())
         .pipe($.gulp.dest('build/styles'))
         .pipe($.bs.reload({
             stream: true
