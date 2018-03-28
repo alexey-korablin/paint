@@ -1,0 +1,74 @@
+@import(less) 'reset';
+
+// Colors
+@mainColor: #363635;
+@secondColor: #A68F58;
+@textColor: #F15D58;
+@oneMoreColor: #83BF17;
+
+// Measures
+@fullSize: 100%;
+@zeroIntends: 0;
+@baseSize: 10px;
+@brdrBaseSz: 1px; // make mixin for border style
+
+//Mixins
+.fullSize() {
+    width: @fullSize;
+    height: @fullSize;
+}
+
+html, body {
+    background-color: @mainColor;
+    .fullSize;
+    padding: @zeroIntends;
+    margin: @zeroIntends;
+    font-size: @baseSize;
+    box-sizing: border-box;
+}
+
+body {
+    height: @fullSize - 1;
+}
+
+.paint-container {
+    .fullSize
+}
+
+.picture-panel {
+    height: @fullSize - 15;
+    background-color: #fff;
+    margin: @baseSize;
+}
+
+.toolbar {
+    max-width: @fullSize;
+    height: @fullSize - 90;
+    margin: @baseSize;
+    box-sizing: border-box;
+    background-color: @secondColor;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    align-content: center;
+    justify-content: space-evenly;
+    font-size: @baseSize + 8;
+}
+
+.tool-item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    align-content: center;
+    // justify-content: space-evenly;
+    height: @fullSize;
+    min-width: @fullSize - 90;
+    color: @mainColor;
+    padding: @baseSize;
+    cursor: default;
+    border-right: 4px solid @mainColor;
+
+    &:last-child {
+        border: none;
+    }
+}

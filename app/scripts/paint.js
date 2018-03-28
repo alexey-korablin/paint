@@ -73,8 +73,10 @@
         for (let name in controls) {
             toolbar.appendChild(controls[name](cx));
         }
-        const panel = elt('div', {class: 'picturepanel'}, canvas);
-        parent.appendChild(elt('div', null, panel, toolbar));
+        const panel = elt('div', {class: 'picture-panel'}, canvas);
+        parent.appendChild(elt('div', {class: 'paint-container'}, panel, toolbar));
+        canvas.width = document.querySelector('.picture-panel').clientWidth;
+        canvas.height = document.querySelector('.picture-panel').clientHeight; 
     }
 
     controls.tool = function(cx) {
@@ -88,7 +90,7 @@
                 e.preventDefault();
             }
         })
-        return elt('span', null, 'Tool:', select);
+        return elt('span', {class: 'tool-item'}, 'Tool', select);
     }
 
     controls.color = (cx) => {
@@ -99,7 +101,7 @@
             cx.fillStyle = value;
             cx.strokeStyle = value;
         });
-        return elt('span', null, 'Color:', input);
+        return elt('span', {class: 'tool-item'}, 'Color', input);
     };
 
     controls.brushSize = (cx) => {
@@ -110,7 +112,7 @@
         select.addEventListener('change', () => {
             cx.lineWidth = select.value;
         });
-        return elt('span', null, 'Brush size', select);
+        return elt('span', {class: 'tool-item'}, 'Brush size', select);
     };
 
     controls.save = (cx) => {
@@ -130,7 +132,7 @@
         }
         link.addEventListener('mouseover', update);
         link.addEventListener('focus', update);
-        return link;
+        return elt('span', {class: 'tool-item'}, '', link);
     }
 
     controls.openFile = (cx) => {
@@ -145,12 +147,12 @@
             });
             reader.readAsDataURL(input.files[0]);
         });
-        return elt('div', null, 'Open file: ', input);
+        return elt('div', {class: 'tool-item'}, 'Open file ', input);
     }
 
     controls.openURL = (cx) => {
         const input = elt('input', {type: 'text'});
-        const form = elt('form', null, 'Open url: ', input
+        const form = elt('form', {class: 'tool-item'}, 'Open url ', input
         , elt('button', {type: 'submit'}, 'load'));
         form.addEventListener('submit', (e) => {
             e.preventDefault();
