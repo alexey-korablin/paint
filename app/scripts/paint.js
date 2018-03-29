@@ -81,6 +81,7 @@
 
     controls.tool = function(cx) {
         const select = elt('select');
+        const toolName = elt('span', {class: 'tool-descroption'}, 'Tool');
         for (let name in tools) {
             select.appendChild(elt('option', null, name));
         }
@@ -90,7 +91,7 @@
                 e.preventDefault();
             }
         })
-        return elt('span', {class: 'tool-item'}, 'Tool', select);
+        return elt('div', {class: 'tool-item'}, '', toolName, select);
     }
 
     controls.color = (cx) => {
@@ -206,6 +207,6 @@
         }, () => {clearInterval(spray)});
     };
 
-    createPaint(document.body);
+    createPaint(document.body); 
     
 }());

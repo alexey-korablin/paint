@@ -18,6 +18,14 @@
     height: @fullSize;
 }
 
+.flex(@display: flex, @direction: row, @alignA: center, @alignC: center, @justifyC: space-between) {
+    display: @display;
+    flex-direction: @direction;
+    align-items: @alignA;
+    align-content: @alignC;
+    justify-content: @justifyC;
+}
+
 html, body {
     background-color: @mainColor;
     .fullSize;
@@ -47,26 +55,27 @@ body {
     margin: @baseSize;
     box-sizing: border-box;
     background-color: @secondColor;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    align-content: center;
-    justify-content: space-evenly;
+    .flex;
     font-size: @baseSize + 8;
 }
 
+.flex(@display: flex, @direction: row, @alignA: center, @alignC: center, @justifyC: space-between) {
+    display: @display;
+    flex-direction: @direction;
+    align-items: @alignA;
+    align-content: @alignC;
+    justify-content: @justifyC;
+}
+
 .tool-item {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    align-content: center;
-    // justify-content: space-evenly;
+    .flex(@direction: column, @justifyC: flex-start);
     height: @fullSize;
-    min-width: @fullSize - 90;
+    width: @fullSize;
     color: @mainColor;
     padding: @baseSize;
     cursor: default;
     border-right: 4px solid @mainColor;
+    margin-top: @baseSize * 2;
 
     &:last-child {
         border: none;
