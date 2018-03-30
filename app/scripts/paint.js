@@ -80,8 +80,8 @@
     }
 
     controls.tool = function(cx) {
-        const select = elt('select');
-        const toolName = elt('span', {class: 'tool-descroption'}, 'Tool');
+        const select = elt('select', {class: 'tool-item-block--item'});
+        const toolName = elt('span', {class: 'tool-description'}, 'Tools');
         for (let name in tools) {
             select.appendChild(elt('option', null, name));
         }
@@ -91,33 +91,36 @@
                 e.preventDefault();
             }
         })
-        return elt('div', {class: 'tool-item'}, '', toolName, select);
+        return elt('div', {class: 'tool-item-block'}, '', toolName, select);
     }
 
     controls.color = (cx) => {
-        const input = elt('input', {type: 'color'});
+        const input = elt('input', {type: 'color', class: 'tool-item-block--item'});
+        const toolName = elt('span', {class: 'tool-description'}, 'Choose color');
         input.addEventListener('change', () => {
             console.log(event.path[0].value, cx);
             let value = event.path[0].value;
             cx.fillStyle = value;
             cx.strokeStyle = value;
         });
-        return elt('span', {class: 'tool-item'}, 'Color', input);
+        return elt('div', {class: 'tool-item-block'}, '', toolName, input);
     };
 
     controls.brushSize = (cx) => {
-        const select = elt('select');
+        const select = elt('select', {class: 'tool-item-block--item'});
+        const toolName = elt('span', {class: 'tool-description'}, 'Choose brush size');
         const sizes = [1, 2, 3, 5, 8, 12, 25, 35, 50, 75, 100];
         sizes.forEach(item => select.appendChild(elt('option'
         , {value: item}, `${item} pixels`)));
         select.addEventListener('change', () => {
             cx.lineWidth = select.value;
         });
-        return elt('span', {class: 'tool-item'}, 'Brush size', select);
+        return elt('div', {class: 'tool-item-block'}, '', toolName, select);
     };
 
     controls.save = (cx) => {
-        const link = elt('a', {href: '/'}, 'Save');
+        const link = elt('a', {href: '/', class: 'tool-item-block--item__link'}, 'Save');
+        const toolName = elt('span', {class: 'tool-description'}, 'Save your work');
         function update () {
             try {
                 link.href = cx.canvas.toDataURL();
@@ -133,11 +136,12 @@
         }
         link.addEventListener('mouseover', update);
         link.addEventListener('focus', update);
-        return elt('span', {class: 'tool-item'}, '', link);
+        return elt('div', {class: 'tool-item-block'}, '', toolName, link);
     }
 
     controls.openFile = (cx) => {
-        const input = elt('input', {type: 'file'});
+        const input = elt('input', {type: 'file', class: 'tool-item-block--item__file-open'});
+        const toolName = elt('span', {class: 'tool-description'}, 'Open file');
         input.addEventListener('change', () => {
             if (input.files.length === 0) {
                 return; 
@@ -148,18 +152,19 @@
             });
             reader.readAsDataURL(input.files[0]);
         });
-        return elt('div', {class: 'tool-item'}, 'Open file ', input);
+        return elt('div', {class: 'tool-item-block'}, '', toolName, input);
     }
 
     controls.openURL = (cx) => {
-        const input = elt('input', {type: 'text'});
-        const form = elt('form', {class: 'tool-item'}, 'Open url ', input
+        const input = elt('input', {type: 'text', class: 'tool-item-block--item'});
+        const toolName = elt('div', {class: 'tool-description'}, 'Open url');
+        const form = elt('form', {class: 'tool-item-block--item__form'}, '', input
         , elt('button', {type: 'submit'}, 'load'));
         form.addEventListener('submit', (e) => {
             e.preventDefault();
             loadImageURL(cx, form.querySelector('input').value);
         })
-        return form;
+        return elt('div', {class: 'tool-item-block'}, '', toolName, form);
     }
 
     tools.Line = (event, cx, onEnd) => {
